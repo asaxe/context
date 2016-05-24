@@ -1,14 +1,22 @@
-clear
+function compute_context_perf(theta,particle_id,expt_num)
 
 tic
 % Parameters
 N = 500;
-alpha = .09;
+alpha = theta(1);
 P = round(alpha*N);
+Nv = theta(2);
+dS = theta(3); % Flip bits wp dS/2
+
+% Context patterns
+v = [1:Nv]; % Pattern #1 is to be recalled
+ 
+
 should_plot = false;
 
 
-%%
+%
+
 
 Nreps = 100;
 
@@ -30,24 +38,15 @@ for r = 1:Nreps
        J(i,i)=0; 
     end
 
-    % Context patterns
-    v = [1:5]; % Pattern #1 is to be recalled
-    Nv = length(v);
-
     % Generate perturbation of memory location
-    dS = .8; % Flip bits wp dS/2
     s0 = xi(:,v(1)).*(2*(rand(N,1)>dS/2)-1);
 
     % Simulate standard dynamics
-
-    s = s0;
-    for itr = 1:Nitr
-        s = sign(J*s);
-        m(:,itr) = 1/N*s'*xi;
-    end
+    m = hopfield_add_gain(0, 0, 1, J, xi, s0, v, Nitr);
     m_n(:,r) = m(:,end);
-    %
+    
     if should_plot
+        clf
         plot(m(v(1),:),'linewidth',2)
         hold on
         for i = 2:Nv
@@ -58,75 +57,25 @@ for r = 1:Nreps
         ylabel('Overlap m')
     end
 
-    % Add summative context input from set of three patterns
-    h = .6;
-
-    c = mean(xi(:,v),2);
-
-  
-    s = s0;
-    for itr = 1:Nitr
-        s = sign(J*s+h*c);
-        m(:,itr) = 1/N*s'*xi;
+    % Simulate additive dynamics
+    m = hopfield_add_gain(ha, 0, 1, J, xi, s0, v, Nitr);
+    m_a(:,r) = m(:,end);
+    
+    if should_plot
+        plot(m(v(1),:),'linewidth',2)
+        hold on
+        for i = 2:Nv
+           plot(m(v(i),:),'c','linewidth',2)
+        end
+        plot(m(setdiff(1:P,v),:)','r')
+        xlabel('Iteration')
+        ylabel('Overlap m')
     end
     
-    m_a(:,r) = m(:,end);
-    %
-  if should_plot
-        plot(m(v(1),:),'linewidth',2)
-        hold on
-        for i = 2:Nv
-           plot(m(v(i),:),'c','linewidth',2)
-        end
-        plot(m(setdiff(1:P,v),:)','r')
-        xlabel('Iteration')
-        ylabel('Overlap m')
-    end
-
-
-    % Add gain context modulation 
-    h = 1;
-
-    cp = mean(xi(:,v),2);
-    %cm = mean(xi(:,setdiff(1:P,v)),2);
-    c = 1-h*abs(cp);
-
-
-    s = s0;
-    for itr = 1:Nitr
-        s = sign(J*(c.*s));
-        m(:,itr) = 1/N*s'*xi;
-    end
-
-    %
-    if should_plot
-        plot(m(v(1),:),'linewidth',2)
-        hold on
-        for i = 2:Nv
-           plot(m(v(i),:),'c','linewidth',2)
-        end
-        plot(m(setdiff(1:P,v),:)','r')
-        xlabel('Iteration')
-        ylabel('Overlap m')
-    end
+    % Simulate gain dynamics
+    m = hopfield_add_gain(0, hg, hgm, J, xi, s0, v, Nitr);
     m_g(:,r) = m(:,end);
     
-    % Both add & gain
-    ha = .3;
-    hg = 1;
-
-    ca = mean(xi(:,v),2);
-    %cm = mean(xi(:,setdiff(1:P,v)),2);
-    c = 1-hg*abs(ca);
-
-    Nitr = 100;
-    s = s0;
-    for itr = 1:Nitr
-        s = sign(J*(c.*s)+ha*ca);
-        m(:,itr) = 1/N*s'*xi;
-    end
-    m_ag(:,r) = m(:,end);
-    %
     if should_plot
         plot(m(v(1),:),'linewidth',2)
         hold on
@@ -136,6 +85,22 @@ for r = 1:Nreps
         plot(m(setdiff(1:P,v),:)','r')
         xlabel('Iteration')
         ylabel('Overlap m')
+    end
+  
+    % Simulate additive & gain dynamics
+    m = hopfield_add_gain(ha, hg, hgm, J, xi, s0, v, Nitr);
+    m_ag(:,r) = m(:,end);
+    
+    if should_plot
+        plot(m(v(1),:),'linewidth',2)
+        hold on
+        for i = 2:Nv
+           plot(m(v(i),:),'c','linewidth',2)
+        end
+        plot(m(setdiff(1:P,v),:)','r')
+        xlabel('Iteration')
+        ylabel('Overlap m')
+        pause
     end
 
 end
@@ -145,7 +110,7 @@ legend('No Context','Additive field','Gain field','Add. & Gain')
 
 %%
 corr_thresh = 1;
-pct_correct = false;
+pct_correct = true;
 if pct_correct
     tmp=mean(m_n>=corr_thresh,2);
 else
