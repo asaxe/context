@@ -3,11 +3,11 @@ function launch_grid
 expt_nm = 1;
 mkdir(sprintf('~/context/results/expt%d',expt_nm))
 
-alphas = linspace(.08 .17,10); % Load (num patterns P/num dimensions N)
+alphas = linspace(.08, .17, 10); % Load (num patterns P/num dimensions N)
 Nvs = 2:10;
 dSs = .1:.1:.9; % How far from pattern to start (2*prob flipping each bit)
 
-memory = 1500;
+memorybudget = 1500;
 ncores = 1;
 fn_str = 'run_context_perf_grid';
 
@@ -26,5 +26,5 @@ length(theta)
 
 launch_fn = @run_odyssey;
 
-launch_fn(theta, fn_str, membudget, ncores, expt_nm)
+launch_fn(theta, fn_str, memorybudget, ncores, expt_nm)
 	 
