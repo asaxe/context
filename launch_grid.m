@@ -9,6 +9,7 @@ dSs = .1:.1:.9; % How far from pattern to start (2*prob flipping each bit)
 
 memory = 1500;
 ncores = 1;
+fn_str = 'run_context_perf_grid';
 
 i = 1;
 for alpha = alphas
@@ -25,5 +26,5 @@ length(theta)
 
 launch_fn = @run_odyssey;
 
-launch_fn(theta, membudget, ncores, expt_nm)
+launch_fn(theta, fn_str, membudget, ncores, expt_nm)
 	 
