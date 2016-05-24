@@ -24,7 +24,7 @@ for i = 1:N
     fprintf(fid,'#SBATCH --mem=%d\n\n',round(membudget));
     fprintf(fid,'cd %s\n',wd);
     fprintf(fid,'module load matlab/R2015a-fasrc01\n');
-    fprintf(fid,'cd %s; matlab-default -nodisplay -nojvm -nodesktop -nosplash -r "addpath(''~/context/''),startup,%s(%s,%d,%d),exit"\n',wd,fn_str,mat2str(thetas(i,:)),particle_id(i),expt_nm);
+    fprintf(fid,'cd %s; matlab-default -nodisplay -nojvm -nodesktop -nosplash -r "addpath(''~/context/''),startup,%s(%s,%d,%d),exit"\n',wd,fn_str,mat2str(thetas(i,:)),i,expt_nm);
     % confusing string escaping note: to get one single quote, put in two
     
     fclose(fid);
