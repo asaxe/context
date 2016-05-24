@@ -21,7 +21,7 @@ for alpha = alphas
     end
 end
 
-save(sprintf('~/context/results/expt%d/params.mat',expt_nm),'theta','memory','ncores','expt_nm')
+save(sprintf('~/context/results/expt%d/params.mat',expt_nm),'theta','memorybudget','ncores','expt_nm')
 length(theta)
 
 launch_fn = @run_odyssey;
