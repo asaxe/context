@@ -1,0 +1,23 @@
+function res = collate_results(expt_nm)
+
+
+corr_thresh = 1;
+
+fs = dir(sprintf('./results/expt%d/*.mat',expt_nm));
+
+for i = 1:length(fs)
+    
+    if strcmp(fs(i).name,'params.mat')
+        contin
+    end
+    load(sprintf('./results/expt%d/%s',expt_nm,fs(i).name))
+    
+    
+    m = ma;
+    for j = 1:size(m,1)
+       for k = 1:size(m,2)    
+          mout(i,j,:) = compute_avg_overlaps(m{i,j},v,pct_correct,corr_thresh);
+       end
+    end
+
+end
