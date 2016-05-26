@@ -13,10 +13,11 @@ fn_str = 'run_linear_ineq_grid';
 
 i = 1;
 for N = Ns
-for alpha = alphas
-    for alg = algs
-        theta(i,:) = [N alpha alg];
-        i = i + 1;
+    for alpha = alphas
+        for alg = algs
+            theta(i,:) = [N alpha alg];
+            i = i + 1;
+        end
     end
 end
 

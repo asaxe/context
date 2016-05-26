@@ -1,6 +1,10 @@
 function run_linear_ineq_grid(theta,particle_id,expt_num)
 
 % Theta = [N alpha alg]
+%%
+addpath('~/cvx')
+cvx_setup
+
 
 % Parameters
 N = theta(1);
