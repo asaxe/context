@@ -102,7 +102,7 @@ for nv = 1:length(Nvs)
     kag(nv) = 1/cvx_optval;
 
 end
-toc
+
 
 %%
 n = xi.*(J*xi);

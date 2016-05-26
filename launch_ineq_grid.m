@@ -1,6 +1,6 @@
 function launch_ineq_grid
 
-expt_nm = 2;
+expt_nm = 3;
 mkdir(sprintf('~/context/results/expt%d',expt_nm))
 
 Ns = [500 1000];
