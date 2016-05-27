@@ -111,4 +111,4 @@ k_no_ctxt = min(n(:))/norm(J,'fro');
 
 dir_prefix = '/n/home13/asaxe/context/results';
 %dir_prefix = '.';
-save(sprintf('%s/expt%d/res_alpha_%g_Nv_%d_alg_%d.mat',dir_prefix,expt_num,theta(1),theta(2),theta(3)),'theta','Nvs','k_no_ctxt','ka','kag')
+save(sprintf('%s/expt%d/res_N_%d_alpha_%g_alg_%d.mat',dir_prefix,expt_num,theta(1),theta(2),theta(3)),'theta','Nvs','k_no_ctxt','ka','kag')

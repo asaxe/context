@@ -3,11 +3,11 @@ function launch_ineq_grid
 expt_nm = 3;
 mkdir(sprintf('~/context/results/expt%d',expt_nm))
 
-Ns = [250 500 1000];
+Ns = [1000];
 alphas = linspace(1,1.9,9); % Load (num patterns P/num dimensions N)
 algs = 3; % How far from pattern to start (2*prob flipping each bit)
 
-memorybudget = 10000;
+memorybudget = 3000;
 ncores = 1;
 fn_str = 'run_linear_ineq_grid';
 
