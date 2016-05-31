@@ -7,11 +7,11 @@ Ns = [2000];
 alphas = [1.5]; % Load (num patterns P/num dimensions N)
 fs = [.01]; % Sparsity
 N_tokens = [round(linspace(2,10,5)) round(linspace(20,100,5))];
-h0s = [0 logspace(-2,0,10)];
 fns = linspace(0,1,10);
+algs = [2];
 
 
-memorybudget = 2500;
+memorybudget = 3000;
 ncores = 1;
 fn_str = 'run_ctxt_sparse';
 
@@ -20,12 +20,13 @@ for N = Ns
     for alpha = alphas
         for f = fs
             for N_t = N_tokens
-                for h0 = h0s
-                    for fn = fns
-                        theta(i,:) = [N alpha f N_t h0 fn];
+                for fn = fns
+                    for alg = algs
+                        theta(i,:) = [N alpha f N_t fn alg];
                         i = i + 1;
                     end
                 end
+         
             end
         end
     end

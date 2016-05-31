@@ -68,7 +68,7 @@ num_mach = sum(overlaps == 1);
 
 simtime=toc
 
-%figure
+% figure
 % plot(1:T+1,M(:,1),'b-o'); hold on; 
 % for j=2:N_token
 %     plot(1:T+1,M(:,j)); hold on; 

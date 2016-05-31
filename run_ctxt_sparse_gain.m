@@ -1,5 +1,8 @@
-%function run_ctxt_sparse(theta,particle_id,expt_num)
-clear 
+function run_ctxt_sparse(theta,particle_id,expt_num)
+
+addpath('~/cvx')
+cvx_setup
+
 tic 
 theta = [2000 1.5 .01 10 .5 2];
 N=theta(1);
