@@ -47,7 +47,7 @@ end
     h=J*S+hext;
     for tt=1:T
         
-        h(l)=J*S+hext;
+        h=J*S+hext;
         h_sort=sort(h);
         Thresh = h_sort(round((1-f)*length(h_sort)));
         S=(h>Thresh);

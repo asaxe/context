@@ -10,7 +10,7 @@ N_token=theta(4);
 fn=theta(5);
 alg = theta(6);
 
-n_trials = 3;
+n_trials = 1;
 overlaps = zeros(n_trials,1);
 overlap_ef = zeros(n_trials,1);
 dist_overlaps = zeros(n_trials,1);
@@ -96,16 +96,16 @@ end
     overlap_ef(nn) = M(T_ext_field_off,1);
     dist_overlaps(nn) = mean(M(end,2:end));
     
-    plot(1:T+1,M(:,1),'b-o'); hold on; 
-    for j=2:N_token
-        plot(1:T+1,M(:,j)); hold on; 
-    end
-
-    axis([0 inf -0.1 1.1])
-
-
-    pause
-    clf
+%     plot(1:T+1,M(:,1),'b-o'); hold on; 
+%     for j=2:N_token
+%         plot(1:T+1,M(:,j)); hold on; 
+%     end
+% 
+%     axis([0 inf -0.1 1.1])
+% 
+% 
+%     pause
+%     clf
 end
 
 mean_overlap = mean(overlaps);
@@ -119,4 +119,4 @@ simtime=toc
 %figure
 
 dir_prefix = '/n/home13/asaxe/context/results';
-save(sprintf('%s/expt%d/res_%d.mat',dir_prefix,expt_num,particle_id),'theta','overlaps','overlap_ef','dist_overlaps','mean_overlap','num_mach','w','h_to_save')
+save(sprintf('%s/expt%d/res_%d.mat',dir_prefix,expt_num,particle_id),'theta','overlaps','overlap_ef','dist_overlaps','mean_overlap','num_mach','w','h_to_save','k_margin')
