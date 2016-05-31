@@ -1,4 +1,4 @@
-function run_odyssey(thetas, fn_str, membudget, ncores, expt_nm)
+function run_odyssey(thetas, fn_str, membudget, ndays, nhours, ncores, expt_nm)
 
 % make param file
 
@@ -15,7 +15,7 @@ for i = 1:N
     fprintf(fid,'#SBATCH --job-name=%s\n',jobname);
     fprintf(fid,'#SBATCH --output=/n/home13/asaxe/context/results/expt%d/%s.out\n',expt_nm,jobname);
     fprintf(fid,'#SBATCH --error=/n/home13/asaxe/context/results/expt%d/%s.err\n',expt_nm,jobname);
-    fprintf(fid,'#SBATCH -t 0-6:00\n');
+    fprintf(fid,'#SBATCH -t %d-%d:00\n',ndays,nhours);
     fprintf(fid,'#SBATCH -p general\n');
     fprintf(fid,'#SBATCH -n %d\n',ncores);
     fprintf(fid,'#SBATCH -N 1\n');

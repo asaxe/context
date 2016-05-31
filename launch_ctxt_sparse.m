@@ -10,7 +10,8 @@ N_tokens = [round(linspace(2,10,5)) round(linspace(20,100,5))];
 h0s = [0 logspace(-2,0,10)];
 fns = linspace(0,1,10);
 
-
+ndays = 0;
+nhours = 6;
 memorybudget = 2500;
 ncores = 1;
 fn_str = 'run_ctxt_sparse';
@@ -36,5 +37,5 @@ length(theta)
 
 launch_fn = @run_odyssey;
 
-launch_fn(theta, fn_str, memorybudget, ncores, expt_nm)
+launch_fn(theta, fn_str, memorybudget, ndays, nhours, ncores, expt_nm)
 	 
