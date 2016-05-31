@@ -3,12 +3,6 @@ function launch_ctxt_sparse
 expt_nm = 4;
 mkdir(sprintf('~/context/results/expt%d',expt_nm))
 
-P=round(N*alpha);
-f=theta(3);
-N_token=theta(4);
-h0=theta(5)/f;
-fn=theta(6);
-
 Ns = [2000];
 alphas = [1.5]; % Load (num patterns P/num dimensions N)
 fs = [.01]; % Sparsity
