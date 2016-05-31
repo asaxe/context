@@ -10,7 +10,7 @@ N_token=theta(4);
 h0=theta(5)/f;
 fn=theta(6);
 
-n_trials = 3;
+n_trials = 100;
 overlaps = zeros(n_trials,1);
 overlap_ef = zeros(n_trials,1);
 dist_overlaps = zeros(n_trials,1);
