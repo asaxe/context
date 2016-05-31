@@ -7,7 +7,7 @@ Ns = [2000];
 alphas = [1.5]; % Load (num patterns P/num dimensions N)
 fs = [.01]; % Sparsity
 N_tokens = round(linspace(2,100,10));
-h0 = logspace(0,2,10);
+h0s = logspace(0,2,10);
 fns = linspace(0,1,10);
 
 
