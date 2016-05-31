@@ -46,12 +46,12 @@ end
     MM(1)=S'*(Pat(:,2)-f)/normP(2);
     h=J*S+hext;
     for tt=1:T
-        for l=1:N
-            h(l)=J(l,:)*S+hext(l);
-            h_sort=sort(h);
-            Thresh = h_sort(round((1-f)*length(h_sort)));
-            S=(h>Thresh);
-        end
+        
+        h(l)=J*S+hext;
+        h_sort=sort(h);
+        Thresh = h_sort(round((1-f)*length(h_sort)));
+        S=(h>Thresh);
+        
         M(tt+1,1:N_token)=S'*(Pat(:,1:N_token)-f)/normP(1);
         if tt>T_ext_field_off
             hext=zeros(N,1);

@@ -1,13 +1,13 @@
 function launch_ctxt_sparse
 
-expt_nm = 4;
+expt_nm = 5;
 mkdir(sprintf('~/context/results/expt%d',expt_nm))
 
 Ns = [2000];
 alphas = [1.5]; % Load (num patterns P/num dimensions N)
 fs = [.01]; % Sparsity
 N_tokens = round(linspace(2,100,10));
-h0s = logspace(0,2,10);
+h0s = [0 logspace(-2,0,10)];
 fns = linspace(0,1,10);
 
 
