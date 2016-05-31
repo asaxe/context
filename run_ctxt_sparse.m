@@ -78,4 +78,4 @@ simtime=toc
 % 
 
 dir_prefix = '/n/home13/asaxe/context/results';
-save(sprintf('%s/expt%d/res_%d.mat',dir_prefix,expt_num,particle_id),'theta',overlaps,overlap_ef,dist_overlaps,mean_overlap,num_mach)
+save(sprintf('%s/expt%d/res_%d.mat',dir_prefix,expt_num,particle_id),'theta','overlaps','overlap_ef','dist_overlaps','mean_overlap','num_mach')
