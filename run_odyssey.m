@@ -15,7 +15,7 @@ for i = 1:N
     fprintf(fid,'#SBATCH --job-name=%s\n',jobname);
     fprintf(fid,'#SBATCH --output=/n/home13/asaxe/context/results/expt%d/%s.out\n',expt_nm,jobname);
     fprintf(fid,'#SBATCH --error=/n/home13/asaxe/context/results/expt%d/%s.err\n',expt_nm,jobname);
-    fprintf(fid,'#SBATCH -t 4-00:00\n');
+    fprintf(fid,'#SBATCH -t 0-04:00\n');
     fprintf(fid,'#SBATCH -p general\n');
     fprintf(fid,'#SBATCH -n %d\n',ncores);
     fprintf(fid,'#SBATCH -N 1\n');

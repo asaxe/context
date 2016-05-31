@@ -1,16 +1,17 @@
 clear
 tic
 % Parameters
-N = 500;
-alpha = 1.5;
-alg = 3;
+N = 100;
+alpha = 1;
+f = .01;
+alg = 1;
 
 P = round(alpha*N);
 should_plot = false;
 
 
 % Create patterns
-xi = 2*(rand(N,P)>.5)-1;
+xi = 2*(rand(N,P)>(1-f))-1;
 
 % Create Hebbian associations
 if alg == 1 % Create Hebbian associations
@@ -45,7 +46,7 @@ elseif alg == 3 % Create SVM associations
 end
 
 
-% Select context subset
+%% Select context subset
 Nv = P;
 Nvs = round(linspace(2,10,9));
 for nv = 1:length(Nvs)
@@ -76,15 +77,15 @@ for nv = 1:length(Nvs)
 %     kg(nv) = 1/cvx_optval;
    
     % Find max-margin gain + summed additive field solution
-%     cvx_clear
-%     cvx_begin
-%         variable w(N)
-%         variable h
-%         minimize( norm(J*diag(w),'fro') )
-%         subject to
-%             xi_v.*(J*diag(w)*xi_v) + xi_v.*(h*mean(xi_v,2)*ones(1,Nvs(nv))) > 1
-%     cvx_end
-%     ksg(nv) = 1/cvx_optval;
+    cvx_clear
+    cvx_begin
+        variable w(N)
+        variable h
+        minimize( norm(J*diag(w),'fro') )
+        subject to
+            xi_v.*(J*diag(w)*xi_v) + xi_v.*(h*mean(xi_v,2)*ones(1,Nvs(nv))) > 1
+    cvx_end
+    ksg(nv) = 1/cvx_optval;
     
     % Find max-margin gain + additive solution
     cvx_clear
@@ -99,12 +100,13 @@ for nv = 1:length(Nvs)
 
 end
 toc
+
 %%
 n = xi.*(J*xi);
 k_no_ctxt = min(n(:))/norm(J,'fro');
 subplot(121)
-plot(Nvs,ones(length(Nvs),1)*k_no_ctxt,Nvs,ka,Nvs,kag,'.-','linewidth',2)
-legend('No context','Additive','Add. & Gain')
+plot(Nvs,ones(length(Nvs),1)*k_no_ctxt,Nvs,ka,Nvs,ksg,Nvs,kag,'.-','linewidth',2)
+legend('No context','Additive','FA & G','Add. & Gain')
 
 ylabel('Margin \kappa')
 xlabel('Size of context set N_v')
@@ -114,6 +116,29 @@ subplot(122)
 plot(Nvs,kag/k_no_ctxt,'linewidth',2)
 xlabel('Size of context set N_v')
 ylabel('(Margin with context) / (Margin without context)')
+
+
+%% what is overlap with perturbed patterns?
+f = .01;
+nreps = 100;
+N = 2000;
+Nv = 1000;
+Nvs = 1:10:Nv;
+for n = 1:length(Nvs);
+    
+    for r = 1:nreps
+        xi_v = 2*(rand(N,Nvs(n))>(1-f))-1;
+        numdist(n,r) = sum(abs(sum(xi_v,2))==Nvs(n));
+    end
+    
+end
+plot(Nvs,mean(numdist,2))
+
+%% Analy version
+f = .01;
+N = 1000;
+Nvs = 1:N;
+plot(Nvs,N*((1-f)*f.^(Nvs-1)+f*(1-f).^(Nvs-1)))
 
 %%
 n = xi.*(J*xi);
