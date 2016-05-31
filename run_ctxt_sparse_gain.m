@@ -56,8 +56,9 @@ end
                 (2*S1-1).*( 2*( J*diag(w)*S1 + h*ones(1,N_token) )) > 1
         cvx_end
         k_margin = 1/cvx_optval;
-        hext = h
-        gain = w
+        hext = h;
+        h_to_save = h;
+        gain = w;
         clear h
     end
     
@@ -112,14 +113,10 @@ num_mach = sum(overlaps == 1);
 
 simtime=toc
 
-%%
-n = (2*Pat-1).*(2*(J*Pat-.2));
-k_no_ctxt = min(n(:))/norm(J,'fro');
 
-acc = mean(mean(Pat == (J*Pat>.2)))
 
 %%
 %figure
 
-%dir_prefix = '/n/home13/asaxe/context/results';
-%save(sprintf('%s/expt%d/res_%d.mat',dir_prefix,expt_num,particle_id),'theta','overlaps','overlap_ef','dist_overlaps','mean_overlap','num_mach')
+dir_prefix = '/n/home13/asaxe/context/results';
+save(sprintf('%s/expt%d/res_%d.mat',dir_prefix,expt_num,particle_id),'theta','overlaps','overlap_ef','dist_overlaps','mean_overlap','num_mach','w','h_to_save')
