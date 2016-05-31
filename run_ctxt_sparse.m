@@ -30,9 +30,9 @@ end
 
     S1(:,1:N_token)=Pat(:,1:N_token);
     S=S1(:,1); S0=S; 
-    ipos=randsample(find(S0==1),fn*length(find(S0==1)));
+    ipos=randsample(find(S0==1),round(fn*length(find(S0==1))));
     S(ipos)=~S0(ipos);
-    ineg=randsample(find(S0==0),fn*length(find(S0==1)));
+    ineg=randsample(find(S0==0),round(fn*length(find(S0==1))));
     S(ineg)=~S0(ineg);
     %mean(S.*S0)
 
