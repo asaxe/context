@@ -6,12 +6,12 @@ mkdir(sprintf('~/context/results/expt%d',expt_nm))
 Ns = [2000];
 alphas = [1.5]; % Load (num patterns P/num dimensions N)
 fs = [.01]; % Sparsity
-N_tokens = [round(linspace(2,10,5)) round(linspace(20,100,5))];
-h0s = [0 logspace(-2,0,10)];
-fns = linspace(0,1,10);
+N_tokens = [round(linspace(2,20,10))];
+h0s = [0 linspace(.01,1,8) 2];
+fns = linspace(0.5,1,10);
 
 ndays = 0;
-nhours = 6;
+nhours = 8;
 memorybudget = 2500;
 ncores = 1;
 fn_str = 'run_ctxt_sparse';

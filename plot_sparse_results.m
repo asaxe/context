@@ -14,11 +14,26 @@ for nt = 1:length(Nts)
         ov(nt,fn) = m;
         oh(nt,fn) = params(inds(mi),5);
         
-        [~,mi] = min(params(inds,5));
-        ov0(nt,fn) = mean_overlap{mi};
+        tmp = cell2mat(overlap_ef(inds));
+        m2 = max(mean(tmp));
+        of(nt,fn)=m2;
+        
+        tmp = cell2mat(overlaps(inds));
+        m3 = max(mean(tmp));
+        o(nt,fn)=m3;
+        
+        [~,mi2] = min(params(inds,5));
+        ov0(nt,fn) = mean_overlap{inds(mi2)};
+        mi == mi2
         
     end
 end
 
 %%
-plot(Nts,ov')
+
+i = 2;
+plot(fns,ov(i,:),fns,ov0(i,:),fns,of(i,:),fns,o(i,:),'linewidth',2)
+legend('Sparse + additive context','No context','Location','SouthWest')
+xlabel('Noise level fn')
+ylabel('Mean target overlap m')
+title(sprintf('N = %d, alpha = %g, f = %g, Nt = %d',params(1,1),params(1,2),params(1,3),Nts(i)))
