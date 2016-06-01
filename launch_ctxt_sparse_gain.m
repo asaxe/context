@@ -14,7 +14,7 @@ ndays = 2;
 nhours = 0;
 memorybudget = 3000;
 ncores = 1;
-fn_str = 'run_ctxt_sparse';
+fn_str = 'run_ctxt_sparse_gain';
 
 i = 1;
 for N = Ns
