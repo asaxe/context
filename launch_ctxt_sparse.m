@@ -1,6 +1,6 @@
 function launch_ctxt_sparse
 
-expt_nm = 5;
+expt_nm = 7;
 mkdir(sprintf('~/context/results/expt%d',expt_nm))
 
 Ns = [2000];
