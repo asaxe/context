@@ -1,10 +1,10 @@
-function run_ctxt_sparse(theta,particle_id,expt_num)
+function run_ctxt_sparse_gain(theta,particle_id,expt_num)
 
 addpath('~/cvx')
 cvx_setup
 
 tic 
-theta = [2000 1.5 .01 10 .5 2];
+%theta = [2000 1.5 .01 10 .5 2];
 N=theta(1);
 alpha=theta(2);
 P=round(N*alpha);
@@ -13,7 +13,7 @@ N_token=theta(4);
 fn=theta(5);
 alg = theta(6);
 
-n_trials = 1;
+n_trials = 100;
 overlaps = zeros(n_trials,1);
 overlap_ef = zeros(n_trials,1);
 dist_overlaps = zeros(n_trials,1);
