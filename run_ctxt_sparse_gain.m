@@ -19,7 +19,7 @@ overlap_ef = zeros(n_trials,1);
 dist_overlaps = zeros(n_trials,1);
 
 for nn=1:n_trials
-    
+    nn
 Pat=[zeros((1-f)*N,P); ones(f*N,P)];
 for l=1:P
     Pat(:,l)=Pat(randperm(N),l);
