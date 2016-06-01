@@ -5,21 +5,23 @@ corr_thresh = 1;
 
 fs = dir(sprintf('./results/expt%d/*.mat',expt_nm));
 
+ind = 1;
 for i = 1:length(fs)
-    i
+    
     if strcmp(fs(i).name,'params.mat')
         continue;
     end
     load(sprintf('./results/expt%d/%s',expt_nm,fs(i).name))
     
     
-    params(i,:) = theta;
-    mdist_overlaps{i} = dist_overlaps;
-    mmean_overlap{i} = mean_overlap;
-    mnum_mach{i} = num_mach;
-    moverlap_ef{i} = overlap_ef;
-    moverlaps{i} = overlaps;
+    params(ind,:) = theta;
+    mdist_overlaps{ind} = dist_overlaps;
+    mmean_overlap{ind} = mean_overlap;
+    mnum_mach{ind} = num_mach;
+    moverlap_ef{ind} = overlap_ef;
+    moverlaps{ind} = overlaps;
  
+    ind = ind + 1;
 end
 
 dist_overlaps = mdist_overlaps;

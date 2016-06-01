@@ -1,5 +1,5 @@
 clear
-load expt4_results.mat
+load expt5_results.mat
 
 %% Optimize over h0
 
@@ -13,6 +13,12 @@ for nt = 1:length(Nts)
         [m,mi] = max(cell2mat(mean_overlap(inds)));
         ov(nt,fn) = m;
         oh(nt,fn) = params(inds(mi),5);
+        
+        [~,mi] = min(params(inds,5));
+        ov0(nt,fn) = mean_overlap{mi};
+        
     end
 end
 
+%%
+plot(Nts,ov')
