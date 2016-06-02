@@ -38,7 +38,7 @@ o0_s = ov0;
 
 
 %% Load and collate gain results
-
+clear ov of o
 load expt6_results.mat
 
 Nts = unique(params(:,4));
@@ -68,8 +68,9 @@ end
 Nt_g = Nts;
 fn_g = fns;
 o_g = o;
+of_g = of;
 
-%% Plot
+%% Plot as func of fn
 
 
 for nt = 1:max([Nt_g' Nt_s'])
@@ -84,5 +85,19 @@ for nt = 1:max([Nt_g' Nt_s'])
     ylabel('Mean target overlap m')
     title(sprintf('N = %d, alpha = %g, f = %g, Nt = %d',params(1,1),params(1,2),params(1,3),nt))
     xlim([.5 1])
+    ylim([0 1.1])
     pause
 end
+
+%% Plot as func of Nt
+ig = 8;
+[~,is] = min(abs(fn_s-fn_g(ig)));
+
+
+plot(Nt_g,o_g(:,ig),Nt_g,of_g(:,ig),Nt_s,o_s(:,is),Nt_s,of_s(:,is),Nt_s,o0_s(:,is),'linewidth',2)
+ legend('Sparse + transient add + gain','sparse + add + gain','Sparse + transient add','Sparse + add','No Context','Location','SouthWest')
+xlabel('Number of tokens N_t')
+ylabel('Mean target overlap m')
+title(sprintf('N = %d, alpha = %g, f = %g, fn = %2.2g',params(1,1),params(1,2),params(1,3),fn_g(ig)))
+ylim([0 1.1])
+
