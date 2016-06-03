@@ -1,6 +1,6 @@
 function launch_ctxt_combo
 
-expt_nm = 8;
+expt_nm = 9;
 mkdir(sprintf('~/context/results/expt%d',expt_nm))
 
 Ns = [2000];
@@ -8,7 +8,7 @@ alphas = [1.5]; % Load (num patterns P/num dimensions N)
 fs = [.01]; % Sparsity
 N_tokens = [round(linspace(2,20,10)) round(linspace(40,100,5))];
 fns = linspace(.5,1,10);
-algs = [2];
+algs = [1];
 
 ndays = 3;
 nhours = 0;
